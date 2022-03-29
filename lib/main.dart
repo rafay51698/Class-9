@@ -1,5 +1,7 @@
+
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firestore_class/signup.dart';
+import 'package:firestore_class/storage.dart';
 import 'package:flutter/material.dart';
 
 void main() async {
@@ -14,7 +16,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Signup(),
+      home: ImageStorage(),
     );
   }
 }
