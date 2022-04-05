@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firestore_class/login.dart';
+import 'package:firestore_class/todo.dart';
 import 'package:flutter/material.dart';
 
 import 'home.dart';
@@ -18,15 +19,12 @@ class Signup extends StatelessWidget {
 
   createUser() async {
     try {
-      await _firebaseAuth.createUserWithEmailAndPassword(
+      UserCredential user = await _firebaseAuth.createUserWithEmailAndPassword(
           email: emailController.text, password: passController.text);
-      await _firebaseFirestore.collection("users").doc().set({
-        "email": emailController.text,
-        "username": nameController.text,
-      });
 
       emailController.clear();
       passController.clear();
+      print("Done signup");
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
         print('The password provided is too weak.');
@@ -113,7 +111,7 @@ class Signup extends StatelessWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => HomePage(),
+                  builder: (context) => MyTodo(),
                 ),
               );
             },

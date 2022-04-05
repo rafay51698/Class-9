@@ -1,47 +1,61 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
+// import 'package:cloud_firestore/cloud_firestore.dart';
+// import 'package:firebase_auth/firebase_auth.dart';
+// import 'package:firebase_core/firebase_core.dart';
+// import 'package:flutter/material.dart';
 
-class HomePage extends StatefulWidget {
-  HomePage({Key? key}) : super(key: key);
-  @override
-  State<HomePage> createState() => _HomePageState();
-}
+// class HomePage extends StatefulWidget {
+//   HomePage({Key? key}) : super(key: key);
+//   @override
+//   State<HomePage> createState() => _HomePageState();
+// }
 
-class _HomePageState extends State<HomePage> {
-  Stream<QuerySnapshot> _usersStream =
-      FirebaseFirestore.instance.collection("users").snapshots();
+// class _HomePageState extends State<HomePage> {
+//   static String uid = '';
 
-  @override
-  Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        body: StreamBuilder<QuerySnapshot>(
-          stream: _usersStream,
-          builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
-            if (snapshot.hasError) {
-              return Text('Something went wrong');
-            }
+//   @override
+//   void initState() {
+//     super.initState();
+//     getuid();
+//   }
 
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              return Text("Loading");
-            }
+//   getuid() async {
+//     User? user = FirebaseAuth.instance.currentUser;
+//     // uid = user!.uid;
+//     setState(() {
+//       uid = user!.uid;
+//     });
+//   }
 
-            return ListView(
-              children: snapshot.data!.docs.map((DocumentSnapshot document) {
-                Map<String, dynamic> data =
-                    document.data()! as Map<String, dynamic>;
-                return ListTile(
-                  title: Text(data['email']),
-                  subtitle: Text(data['username']),
-                );
-              }).toList(),
-            );
-          },
-        ),
-      ),
-    );
-  }
-}
+//   // ignore: prefer_final_fields
+//   Stream<DocumentSnapshot> _usersStream =
+//       FirebaseFirestore.instance.collection("users").doc(uid).snapshots();
 
+//   @override
+//   Widget build(BuildContext context) {
+//     return SafeArea(
+//       child: Scaffold(
+//         body: StreamBuilder<DocumentSnapshot>(
+//             stream: _usersStream,
+//             builder: (BuildContext context,
+//                 AsyncSnapshot<docum> snapshot) {
+//               if (snapshot.hasError) {
+//                 return Text('Something went wrong');
+//               }
 
+//               if (snapshot.connectionState == ConnectionState.waiting) {
+//                 return Text("Loading");
+//               } else {
+//                 final docs = snapshot.data!.get({});
+//                 return ListView.builder(
+//                     itemCount: docs.length,
+//                     itemBuilder: ((context, index) {
+//                       return ListTile(
+//                           title: Text(docs[index]['email']),
+//                           subtitle: Text(docs[index]['username']));
+//                     }));
+//               }
+//             }),
+//       ),
+//     );
+//   }
+// }

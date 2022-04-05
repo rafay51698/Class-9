@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firestore_class/signup.dart';
+import 'package:firestore_class/todo.dart';
 import 'package:flutter/material.dart';
 import 'home.dart';
 
@@ -95,7 +96,7 @@ class Login extends StatelessWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) =>  HomePage(),
+                  builder: (context) =>  MyTodo(),
                 ),
               );
             },
